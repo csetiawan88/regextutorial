@@ -1,4 +1,4 @@
-# Regex Tutorial for HTML Tag
+# Title (replace with your title)
 
 Introductory paragraph (replace this with your text)
 
@@ -46,6 +46,4 @@ Briefly summarize the regex you will be describing and what you will explain. In
 
 ## Author
 
-- Name: Christian Setiawan
-- Github: https://github.com/csetiawan88
-- A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
+A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)

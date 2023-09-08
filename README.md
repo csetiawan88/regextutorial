@@ -1,3 +1,9 @@
+# Regex Tutorial for HTML Tag
+
+## Gist Link
+
+https://gist.github.com/csetiawan88/5499a5350b13394e88c653ac8c812594
+
 # Regex Tutorial Starter Code
 
 # 17 Computer Science for JavaScript: Regex Tutorial
