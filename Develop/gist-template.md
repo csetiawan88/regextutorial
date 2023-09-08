@@ -1,10 +1,15 @@
 # Regex Tutorial for HTML Tag
 
-Introductory paragraph (replace this with your text)
+In this tutorial I will explain how matching an HTML tag regular expression functions by breaking down each part of the expressions and describe its function.
 
 ## Summary
 
-Briefly summarize the regex you will be describing and what you will explain. Include a code snippet of the regex. Replace this text with your summary.
+A regular expression, often abbreviated as "regex" or "regexp," is tool for pattern matching and text manipulation. It's a sequence of characters that defines a search pattern. Regular expressions are used in various programming languages, text editors, and tools to search, match, and manipulate strings of text based on specific patterns or rules.
+
+In this tutorial, we will look into a string of code for a Matching an HTML Tag.
+
+Regex code as follow:
+`/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`
 
 ## Table of Contents
 
@@ -24,9 +29,75 @@ Briefly summarize the regex you will be describing and what you will explain. In
 
 ### Anchors
 
+Anchors are characters within the regular expression that allow the user to match strings that begin with or ends with (or both) certain characters.
+
+The ^ and $ anchors ensure that the tag is matched from the beginning to the end of a line.
+
+Let's break down the components of this regular expression and explain the anchors used:
+
+1. ^: This is the caret symbol, and it's called the "beginning of line" anchor. It asserts that the matched pattern should start at the beginning of a line.
+
+2. $: This is the dollar sign symbol, and it's called the "end of line" anchor. It asserts that the matched pattern should end at the end of a line.
+
+Now, let's break down the rest of the regular expression:
+
+- `<([a-z]+)`: This part matches the opening tag. It starts with <, followed by capturing group ([a-z]+), which matches one or more lowercase letters (the tag name). The tag name is captured inside parentheses for later reference.
+
+- `([^<]+)*`: This part matches any attributes or text content within the opening tag. [^<]+ matches one or more characters that are not <. The \* at the end allows for zero or more of these attribute/content segments.
+
+- `(?:>(.*)<\/\1>|\s+\/>)`: This part captures the closing tag or self-closing tag. It's wrapped in a non-capturing group
+
+To summarize, this regular expression is designed to match and capture HTML tags in a specific format, ensuring that they are properly opened and closed within the same line and correctly formatted.
+
 ### Quantifiers
 
+Quantifiers in regular expressions are symbols or characters that specify the quantity or repetition of the preceding element in the pattern. They control how many times a character, group, or character class can appear in the matched text. Quantifiers are essential for specifying patterns that involve repetition.
+
+The regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/` includes several quantifiers that control the repetition of characters or groups within the pattern. Let's break down the quantifiers used in this regex:
+
+1. `*` (Asterisk): The asterisk quantifier matches zero or more occurrences of the preceding element. In this regex:
+
+- `([^<]+)*` matches zero or more sequences of characters that are not `<`, effectively allowing for the matching of attributes or text content within an opening tag.
+
+2. `+` (Plus): The plus quantifier matches one or more occurrences of the preceding element. In this regex:
+
+- `([a-z]+)` matches one or more lowercase letters (the tag name), ensuring that a tag name must contain at least one lowercase letter.
+
+- `\s+` matches one or more whitespace characters (used in the alternative pattern for self-closing tags), ensuring there is at least one whitespace character before the `/>`.
+
+3. `?` (Question Mark): The question mark quantifier matches zero or one occurrence of the preceding element. In this regex:
+
+- `(?:>(.*)<\/\1>|\s+\/>)` uses the `?` quantifier for the entire non-capturing group. This allows for an optional closing tag or self-closing tag. If a closing tag is present, it matches `>(.*)<\/\1>`, but if not, it matches `\s+\/>` (self-closing tag).
+
+To summarize, these quantifiers provide flexibility in matching different parts of HTML tags:
+
+- `*` allows for zero or more attributes or text content within an opening tag.
+- `+` enforces that there must be at least one lowercase letter in the tag name and at least one whitespace character before a self-closing tag.
+- `?` makes the closing tag or self-closing tag optional, allowing for both open and self-closed tags to be matched by the pattern.
+
 ### OR Operator
+
+The OR operator in regular expressions is represented by the pipe symbol `|`. It allows you to specify multiple alternatives within a regular expression pattern. When using `|`, the regular expression engine will attempt to match any of the alternatives, and if one of them succeeds, the entire pattern is considered a match.
+
+In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$`, the `|` symbol is used as the "OR" operator, denoting an alternation between two different patterns. It allows the regex to match one of two alternatives on the same input string. Let's break down the two alternatives:
+
+1. `(?:>(.*)<\/\1>)`: This alternative matches an opening tag with content and a corresponding closing tag. Here's what it does:
+
+- `>` matches the closing angle bracket of the opening tag.
+- `(.*)` captures any content between the opening and closing tags. `.*` matches any character (except for newline) zero or more times, essentially matching the content.
+- `<\/\1>` matches the corresponding closing tag using a backreference `\1` to the tag name captured in the opening tag.
+
+2. `\s+\/>`: This alternative matches a self-closing tag. Here's what it does:
+
+- `\s+` matches one or more whitespace characters (such as spaces or tabs).
+- `\/>` matches the self-closing angle bracket `/>`.
+
+Therefore, when the regex is applied to an input string, it will look for matches that satisfy either of these two alternatives:
+
+- An opening tag with content and a corresponding closing tag.
+- A self-closing tag.
+
+This allows the regex to handle both types of HTML tag structures and capture the relevant parts as needed.
 
 ### Character Classes
 
@@ -48,4 +119,4 @@ Briefly summarize the regex you will be describing and what you will explain. In
 
 - Name: Christian Setiawan
 - Github: https://github.com/csetiawan88
-- A short section about the author with a link to the author's GitHub profile (replace with your information and a link to your profile)
+- Linkin: https://www.linkedin.com/in/christian-setiawan-1564081a3/
