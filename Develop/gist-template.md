@@ -31,13 +31,13 @@ Regex code as follow:
 
 Anchors are characters within the regular expression that allow the user to match strings that begin with or ends with (or both) certain characters.
 
-The ^ and $ anchors ensure that the tag is matched from the beginning to the end of a line.
+The `^` and `$` anchors ensure that the tag is matched from the beginning to the end of a line.
 
 Let's break down the components of this regular expression and explain the anchors used:
 
-1. ^: This is the caret symbol, and it's called the "beginning of line" anchor. It asserts that the matched pattern should start at the beginning of a line.
+1. `^`: This is the caret symbol, and it's called the "beginning of line" anchor. It asserts that the matched pattern should start at the beginning of a line.
 
-2. $: This is the dollar sign symbol, and it's called the "end of line" anchor. It asserts that the matched pattern should end at the end of a line.
+2. `$`: This is the dollar sign symbol, and it's called the "end of line" anchor. It asserts that the matched pattern should end at the end of a line.
 
 Now, let's break down the rest of the regular expression:
 
@@ -100,6 +100,26 @@ Therefore, when the regex is applied to an input string, it will look for matche
 This allows the regex to handle both types of HTML tag structures and capture the relevant parts as needed.
 
 ### Character Classes
+
+Character classes in regular expressions (regex) are used to define a set or group of characters that can match a single character at a specific position in the text being searched or manipulated. They are enclosed in square brackets `[...]` and allow you to specify a list of characters, character ranges, or predefined character sets that the regular expression engine will match against.
+
+In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, character classes are used to specify which characters are allowed in certain parts of an HTML tag. Let's break down how character classes are used in this regex:
+
+1. `[a-z]+`: This character class matches one or more lowercase letters (a through z). It is used to match the tag name, ensuring that it consists of only lowercase letters.
+
+2. `[^<]+`: This character class matches one or more characters that are not `<`. It is used to match any attributes or text content within the opening tag. Essentially, it allows for any characters except `<` to be present.
+
+3. `\1`: This is not a character class but a backreference. It references the tag name captured in the opening tag. In the closing tag portion of the regex `(?:>(.*)<\/\1>)`, `\1` ensures that the closing tag matches the same tag name as the opening tag.
+
+Here's a brief summary of how these character classes are used within the regex:
+
+- `[a-z]+`: Matches the lowercase tag name (e.g., "div" in `<div>`).
+
+- `[^<]+`: Matches attributes and text content within the opening tag.
+
+- `\1`: Ensures that the closing tag matches the same tag name as the opening tag.
+
+The regex provided is primarily designed to match and validate HTML tags in a specific format, ensuring that they are properly structured with lowercase tag names and optional attributes or text content.
 
 ### Flags
 
