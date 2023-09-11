@@ -160,7 +160,39 @@ These capturing groups allow us to extract specific parts of HTML tags when usin
 
 ### Bracket Expressions
 
+In regular expressions, a bracket expression, also known as a character class, is a way to specify a set of characters that can match a single character at a specific position in the text being searched or manipulated. Bracket expressions are enclosed in square brackets `[...]` and allow us to define a list of characters, character ranges, or predefined character sets that the regular expression engine will attempt to match.
+
+Bracket expressions are a very useful feature in regular expressions and are commonly used to create patterns that match specific sets of characters or types of characters within text. It provide flexibility in defining what we want to match or capture in regex patterns.
+
+In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, bracket expressions (character classes) are used within the square brackets `[a-z]` to specify a range of characters that can match a lowercase letter. Specifically, `[a-z]` matches any single lowercase letter from 'a' to 'z'.
+
+Here's how `[a-z]` is used in the regex pattern:
+
+`[a-z]`: This character class matches a single lowercase letter from 'a' to 'z'. It is used in the regex to ensure that the tag name (e.g., "div" in `<div>`) consists of only lowercase letters.
+
+In the context of the provided regex, `[a-z]+` is used to capture and match the tag name within an HTML opening tag. It ensures that the tag name is composed entirely of lowercase letters. For example, if the input is `<div>`, `[a-z]+` would match and capture "div" as the tag name.
+
+The regex as a whole is designed to match and validate HTML tags in a specific format, ensuring that they are properly structured with lowercase tag names and optional attributes or text content.
+
 ### Greedy and Lazy Match
+
+In regular expressions, "greedy" and "lazy" refer to two different approaches for quantifiers, which control how many times a particular element or group in the regex pattern is matched. Quantifiers specify the number of times a character or group should be matched, and they can be modified to exhibit either greedy or lazy behavior.
+
+In the regular expression `/^<([a-z]+)([^<]+)_(?:>(._)<\/\1>|\s+\/>)$/`, both greedy and lazy quantifiers are used in different parts of the regex.
+
+1. Lazy Quantifiers:
+
+`(.*?)`: This part of the regex uses a lazy (non-greedy) quantifier `*?`. It's part of the capturing group `( ... )` that captures the content within HTML tags when there is a matching closing tag. The `*?` quantifier tries to match as few characters as possible while still allowing the rest of the pattern to match.
+
+2. Greedy Quantifiers:
+
+`([a-z]+)`: This capturing group uses `+` without a lazy quantifier, making it greedy. It matches one or more lowercase letters (a to z) in the opening tag. Greediness ensures that it captures as many characters as possible while still allowing the pattern to match.
+
+`([^<]+)`: This capturing group also uses `+` without a lazy quantifier, making it greedy. It captures any attributes or text content within the opening tag, ensuring that it captures as many characters as possible before the next part of the pattern.
+
+The use of greedy quantifiers in the regex is appropriate because they help capture the maximum amount of content within HTML tags while still ensuring that the overall pattern matches correctly.
+
+So, in summary, the regex `/^<([a-z]+)([^<]+)_(?:>(._)<\/\1>|\s+\/>)$/` predominantly uses greedy quantifiers in capturing groups but employs a lazy quantifier within the content-capturing group to match the content within HTML tags as efficiently as possible.
 
 ### Boundaries
 
