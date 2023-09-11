@@ -33,27 +33,29 @@ Anchors are characters within the regular expression that allow the user to matc
 
 The `^` and `$` anchors ensure that the tag is matched from the beginning to the end of a line.
 
-Let's break down the components of this regular expression and explain the anchors used:
+Here are the break down of this regular expression and explain the anchors used.
 
 1. `^`: This is the caret symbol, and it's called the "beginning of line" anchor. It asserts that the matched pattern should start at the beginning of a line.
 
 2. `$`: This is the dollar sign symbol, and it's called the "end of line" anchor. It asserts that the matched pattern should end at the end of a line.
 
-Now, let's break down the rest of the regular expression:
+Now, here are the break down for the rest of the regular expression:
 
-- `<([a-z]+)`: This part matches the opening tag. It starts with <, followed by capturing group ([a-z]+), which matches one or more lowercase letters (the tag name). The tag name is captured inside parentheses for later reference.
+- `<([a-z]+)`: This part matches the opening tag. It starts with `<`, followed by capturing group `([a-z]+)`, which matches one or more lowercase letters (the tag name). The tag name is captured inside parentheses for later reference.
 
-- `([^<]+)*`: This part matches any attributes or text content within the opening tag. [^<]+ matches one or more characters that are not <. The \* at the end allows for zero or more of these attribute/content segments.
+- `([^<]+)*`: This part matches any attributes or text content within the opening tag. `[^<]+` matches one or more characters that are not `<`. The `\*` at the end allows for zero or more of these attribute/content segments.
 
 - `(?:>(.*)<\/\1>|\s+\/>)`: This part captures the closing tag or self-closing tag. It's wrapped in a non-capturing group
 
-To summarize, this regular expression is designed to match and capture HTML tags in a specific format, ensuring that they are properly opened and closed within the same line and correctly formatted.
+In conclusion, this regular expression is designed to match and capture HTML tags in a specific format, ensuring that they are properly opened and closed within the same line and correctly formatted.
 
 ### Quantifiers
 
 Quantifiers in regular expressions are symbols or characters that specify the quantity or repetition of the preceding element in the pattern. They control how many times a character, group, or character class can appear in the matched text. Quantifiers are essential for specifying patterns that involve repetition.
 
-The regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/` includes several quantifiers that control the repetition of characters or groups within the pattern. Let's break down the quantifiers used in this regex:
+The regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/` includes several quantifiers that control the repetition of characters or groups within the pattern.
+
+Here are the break down for the quantifiers used in this regex:
 
 1. `*` (Asterisk): The asterisk quantifier matches zero or more occurrences of the preceding element. In this regex:
 
@@ -69,7 +71,7 @@ The regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/` includes se
 
 - `(?:>(.*)<\/\1>|\s+\/>)` uses the `?` quantifier for the entire non-capturing group. This allows for an optional closing tag or self-closing tag. If a closing tag is present, it matches `>(.*)<\/\1>`, but if not, it matches `\s+\/>` (self-closing tag).
 
-To summarize, these quantifiers provide flexibility in matching different parts of HTML tags:
+In conclusion, these quantifiers provide flexibility in matching different parts of HTML tags:
 
 - `*` allows for zero or more attributes or text content within an opening tag.
 - `+` enforces that there must be at least one lowercase letter in the tag name and at least one whitespace character before a self-closing tag.
@@ -79,7 +81,9 @@ To summarize, these quantifiers provide flexibility in matching different parts 
 
 The OR operator in regular expressions is represented by the pipe symbol `|`. It allows you to specify multiple alternatives within a regular expression pattern. When using `|`, the regular expression engine will attempt to match any of the alternatives, and if one of them succeeds, the entire pattern is considered a match.
 
-In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$`, the `|` symbol is used as the "OR" operator, denoting an alternation between two different patterns. It allows the regex to match one of two alternatives on the same input string. Let's break down the two alternatives:
+In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$`, the `|` symbol is used as the "OR" operator, denoting an alternation between two different patterns. It allows the regex to match one of two alternatives on the same input string.
+
+Here are the break down for two alternatives:
 
 1. `(?:>(.*)<\/\1>)`: This alternative matches an opening tag with content and a corresponding closing tag. Here's what it does:
 
@@ -101,9 +105,11 @@ This allows the regex to handle both types of HTML tag structures and capture th
 
 ### Character Classes
 
-Character classes in regular expressions (regex) are used to define a set or group of characters that can match a single character at a specific position in the text being searched or manipulated. They are enclosed in square brackets `[...]` and allow you to specify a list of characters, character ranges, or predefined character sets that the regular expression engine will match against.
+Character classes in regular expressions (regex) are used to define a set or group of characters that can match a single character at a specific position in the text being searched or manipulated. They are enclosed in square brackets `[...]` and allow user to specify a list of characters, character ranges, or predefined character sets that the regular expression engine will match against.
 
-In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, character classes are used to specify which characters are allowed in certain parts of an HTML tag. Let's break down how character classes are used in this regex:
+In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, character classes are used to specify which characters are allowed in certain parts of an HTML tag.
+
+Here are break down on how character classes are used in this regex:
 
 1. `[a-z]+`: This character class matches one or more lowercase letters (a through z). It is used to match the tag name, ensuring that it consists of only lowercase letters.
 
@@ -134,7 +140,7 @@ Which included the "i" flag at the end of the regex pattern. The "i" flag makes 
 
 ### Grouping and Capturing
 
-Grouping and capturing are important concepts in regular expressions (regex) that allow us to organize and extract specific portions of a matched pattern. They are achieved using parentheses `( )` in the regex pattern. Another word, Capturing groups are particularly useful when we want to extract specific parts of a matched pattern for further processing or validation, such as extracting data from a structured text document or parsing information from log files.
+Grouping and capturing are important concepts in regular expressions (regex) that allow user to organize and extract specific portions of a matched pattern. They are achieved using parentheses `( )` in the regex pattern. Another word, Capturing groups are particularly useful when we want to extract specific parts of a matched pattern for further processing or validation, such as extracting data from a structured text document or parsing information from log files.
 
 The regular expression `/^<([a-z]+)([^<]+)_(?:>(._)<\/\1>|\s+\/>)$/` is designed to match HTML tags and capture specific parts of those tags.
 
@@ -211,7 +217,7 @@ In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, there a
 
 ### Back-references
 
-Back-references in regular expressions are a mechanism that allows us to refer back to and match the same text that was previously captured by a capturing group within the same regex pattern. They are useful for matching repeated or duplicated text and for ensuring that certain parts of a text are repeated consistently.
+Back-references in regular expressions are a mechanism that allows user to refer back to and match the same text that was previously captured by a capturing group within the same regex pattern. They are useful for matching repeated or duplicated text and for ensuring that certain parts of a text are repeated consistently.
 
 In the regular expression `/^<([a-z]+)([^<]+)_(?:>(._)<\/\1>|\s+\/>)$/`, back-references are used within the pattern to ensure that the opening and closing HTML tags match each other. Specifically, the back-reference `\1` is used.
 
@@ -219,7 +225,7 @@ In the regular expression `/^<([a-z]+)([^<]+)_(?:>(._)<\/\1>|\s+\/>)$/`, back-re
 
 2. `<\/\1>`: This part of the pattern uses the back-reference `\1`. It matches the closing HTML tag and ensures that the closing tag has the same tag name as the opening tag. The back-reference `\1` ensures this consistency by referencing the text captured by `([a-z]+)`.
 
-The breakdown in details:
+Here are the breakdown in details:
 
 - `<([a-z]+)`: This part captures the opening HTML tag and captures the tag name within the first capturing group. For example, if the opening tag is `<div>`, it captures "div" in the first capturing group.
 
@@ -239,4 +245,3 @@ In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, there a
 
 - Name: Christian Setiawan
 - Github: https://github.com/csetiawan88
-- Linkin: https://www.linkedin.com/in/christian-setiawan-1564081a3/
