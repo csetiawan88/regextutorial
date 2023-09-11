@@ -211,7 +211,29 @@ In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, there a
 
 ### Back-references
 
+Back-references in regular expressions are a mechanism that allows us to refer back to and match the same text that was previously captured by a capturing group within the same regex pattern. They are useful for matching repeated or duplicated text and for ensuring that certain parts of a text are repeated consistently.
+
+In the regular expression `/^<([a-z]+)([^<]+)_(?:>(._)<\/\1>|\s+\/>)$/`, back-references are used within the pattern to ensure that the opening and closing HTML tags match each other. Specifically, the back-reference `\1` is used.
+
+1. `\1`: This is the back-reference used in the pattern. It refers back to the text captured by the first capturing group, which is `([a-z]+)`. In this regex, the first capturing group captures the tag name.
+
+2. `<\/\1>`: This part of the pattern uses the back-reference `\1`. It matches the closing HTML tag and ensures that the closing tag has the same tag name as the opening tag. The back-reference `\1` ensures this consistency by referencing the text captured by `([a-z]+)`.
+
+The breakdown in details:
+
+- `<([a-z]+)`: This part captures the opening HTML tag and captures the tag name within the first capturing group. For example, if the opening tag is `<div>`, it captures "div" in the first capturing group.
+
+- `(.*?)`: This part captures the content within the HTML tag, which may include text, other tags, or attributes. It uses a non-greedy quantifier `*?` to capture as little text as possible.
+
+- `<\/\1>`: This part matches the closing HTML tag using the back-reference `\1`. It ensures that the closing tag has the same tag name as the opening tag. For example, if the opening tag is `<div>`, it ensures that the closing tag is `</div>`.
+
+By using the back-reference `\1`, this regex pattern ensures that HTML tags are correctly structured with matching opening and closing tags and that the tag names are consistent between them. This is a common use case for back-references when working with structured text like HTML or XML.
+
 ### Look-ahead and Look-behind
+
+Look-ahead and look-behind assertions in regular expressions are used to define conditions that must be satisfied for a match to occur, without including the matched text in the result. These assertions allow us to specify patterns that need to be present (or absent) in the text surrounding the main pattern we're trying to match. Look-ahead and look-behind assertions are also known as zero-width assertions because they don't consume characters in the input string; instead, they only check whether a condition is met at a particular position.
+
+In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, there are no explicit look-ahead or look-behind assertions (`(?=...)`, `(?!...)`, `(?<=...)`, `(?<!...)`) used.
 
 ## Author
 
