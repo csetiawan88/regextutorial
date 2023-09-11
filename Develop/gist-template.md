@@ -196,6 +196,19 @@ So, in summary, the regex `/^<([a-z]+)([^<]+)_(?:>(._)<\/\1>|\s+\/>)$/` predomin
 
 ### Boundaries
 
+In regular expressions, boundaries are used to define specific positions within the text where a match should occur. They don't match any characters themselves but specify conditions for where a match can start or end. Boundaries are essential for matching text patterns in a precise and controlled way.
+
+Some examples of boundaries:
+
+1. Line Anchors `m` (Multiline)
+2. Start of Line (^)
+3. End of Line ($)
+4. Word Start (\B)
+5. Non-Word Boundary (\B)
+6. Word Boundaries (\b)
+
+In the regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/`, there are no explicit boundary assertions like `\b`, `^`, or `$`.
+
 ### Back-references
 
 ### Look-ahead and Look-behind
