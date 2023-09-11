@@ -123,7 +123,40 @@ The regex provided is primarily designed to match and validate HTML tags in a sp
 
 ### Flags
 
+Flags, also known as modifiers or options, are additional settings that can be applied to regular expressions (regex) to modify their behavior during pattern matching and searching. Flags are typically appended to the end of a regex pattern and control various aspects of how the regex engine interprets and processes the pattern.
+
+The regular expression `/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/` doesn't have any flags specified within the regex pattern itself.
+
+However if we are going to use flags, the syntax could be like this:
+`/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/i`
+
+Which included the "i" flag at the end of the regex pattern. The "i" flag makes the regex case-insensitive, meaning it will match both lowercase and uppercase letters. In this case, it allows the regex to match HTML tags with tag names in any combination of uppercase and lowercase letters.
+
 ### Grouping and Capturing
+
+Grouping and capturing are important concepts in regular expressions (regex) that allow us to organize and extract specific portions of a matched pattern. They are achieved using parentheses `( )` in the regex pattern. Another word, Capturing groups are particularly useful when we want to extract specific parts of a matched pattern for further processing or validation, such as extracting data from a structured text document or parsing information from log files.
+
+The regular expression `/^<([a-z]+)([^<]+)_(?:>(._)<\/\1>|\s+\/>)$/` is designed to match HTML tags and capture specific parts of those tags.
+
+The break down the capturing groups within this regex:
+
+1. `([a-z]+)`: This is the first capturing group and captures the tag name. It matches one or more lowercase letters (a to z) in the opening tag.
+
+2. `([^<]+)`: This is the second capturing group, and it captures any attributes or text content within the opening tag. It matches one or more characters that are not `<`, ensuring that it doesn't extend beyond the opening tag.
+
+3. `(?:>(.\*)<\/\1>|\s+\/>)`: This part of the regex contains a non-capturing group `(?:...)` with two alternatives, separated by the `|` (OR) operator:
+
+- ``> (.\*)<\/\1>`: This is the third capturing group. It captures the content within the HTML tag when there is a matching closing tag. The `\1` is a backreference to the first capturing group, ensuring that the closing tag matches the same tag name as the opening tag.
+
+- `\s+\/>`: This alternative matches self-closing tags. It does not use capturing groups because it is focused on identifying self-closing tags rather than capturing content within them.
+
+In summary, this regex uses three capturing groups:
+
+- The first group captures the tag name.
+- The second group captures attributes or text content within the opening tag.
+- The third group captures content within the HTML tag when a matching closing tag is present.
+
+These capturing groups allow us to extract specific parts of HTML tags when using this regex for parsing or processing HTML code.
 
 ### Bracket Expressions
 
